@@ -1,15 +1,15 @@
 const APIUtil = require("./api_util.js");
 
-function FollowToggle(el) {
+function FollowToggle(el, options) {
   this.$el = $(el);
-  this.userId = this.$el.data("user-id");
-  this.followState = this.$el.data("initial-follow-state");
+  this.userId = this.$el.data("user-id") || options.userId;
+  this.followState = this.$el.data("initial-follow-state") ||
+                      options.followState;
   this.render();
   this.$el.click(this.handleClick.bind(this));
 }
 
 FollowToggle.prototype.render = function () {
-  console.log(this.$el);
   if (this.followState === "followed") {
     this.$el.attr("disabled", false);
     this.$el.text("Unfollow!");
